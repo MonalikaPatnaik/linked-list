@@ -1,0 +1,42 @@
+Given head which is a reference node to a singly-linked list. The value of each node in the linked list is either 0 or 1. The linked list holds the binary representation of a number.
+
+Return the decimal value of the number in the linked list.
+
+The most significant bit is at the head of the linked list.
+
+Code:
+
+class Solution {
+public:
+    
+ 1--   int getDecimalValue(ListNode* head) {
+        vector<int>ans;
+        while(head){
+            ans.push_back(head->val);
+            head=head->next;
+        }
+        int dec=0;int n=ans.size();
+        for(int i=n-1;i>=0;i--){
+          dec+= ans[i]*pow(2,n-1-i);
+        }
+        return dec;
+    }
+    
+  2-- // not using any extra space just finding the length and traversing over ll with multiplication with power of 2 as length..then length--!!
+  int getlen(ListNode*head){
+        int c=0;
+        while(head){
+            c++;
+            head=head->next;
+        }
+        return c-1;
+    }
+    int getDecimalValue(ListNode* head) {
+        ListNode*temp=head;
+        int l=getlen(head);int ans=0;
+        while(temp){
+            ans+=temp->val*pow(2,l--);
+            temp=temp->next;
+        }
+        return ans;  
+};
