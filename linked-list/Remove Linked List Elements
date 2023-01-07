@@ -1,0 +1,26 @@
+Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
+
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        while(head!=NULL && head->val==val){
+            head=head->next;
+            
+        }
+        if(!head)return NULL;
+       // ListNode*curr=NULL;
+        ListNode*temp=head;
+        ListNode*temp1=head->next;
+        while(temp1){
+            if(temp1->val!=val){
+                temp->next=temp1;
+                temp=temp->next;
+            }
+            
+           
+            temp1=temp1->next;}
+        temp->next=NULL;
+        
+        return head;
+    }
+};
