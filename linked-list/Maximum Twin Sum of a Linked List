@@ -1,0 +1,70 @@
+In a linked list of size n, where n is even, the ith node (0-indexed) of the linked list is known as the twin of the (n-1-i)th node, if 0 <= i <= (n / 2) - 1.
+
+For example, if n = 4, then node 0 is the twin of node 3, and node 1 is the twin of node 2. These are the only nodes with twins for n = 4.
+The twin sum is defined as the sum of a node and its twin.
+
+Given the head of a linked list with even length, return the maximum twin sum of the linked li
+
+Code:
+
+1--creating a vector and storing the elements of ll, then finding the maximum twin sum
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        ListNode*temp=head;
+        vector<int>ans;
+        while(temp){
+            ans.push_back(temp->val);
+            temp=temp->next;
+        }
+        int n=ans.size();
+        int sum=INT_MIN;
+        for(int i=0;i<n/2;i++){
+            sum=max(sum,ans[i]+ans[n-i-1]);
+        }
+        return sum;
+    }
+};
+
+2-- the logic is finding the mid of ll and reversing the rest ll after the mid then adding the elements simultaneously!!
+
+class Solution {
+public:
+    ListNode*middle(ListNode*head){
+        ListNode*slow=head;
+        ListNode*fast=slow->next;
+        while(fast->next){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        return slow;
+    }
+    ListNode*reverse(ListNode* head){
+        ListNode* prev=NULL;
+        ListNode* nxt;
+        while(head){
+            nxt=head->next;
+            head->next=prev;
+            prev=head;
+            head=nxt;
+        }
+        return prev;
+    }
+    int pairSum(ListNode* head) {
+        // ListNode*temp=head;
+        if(!head)return 0;
+       ListNode*mid=middle(head);
+        
+        int sum=INT_MIN;
+        mid->next=reverse(mid->next);
+        ListNode*curr=mid->next;
+        while(curr){
+            int val=head->val+curr->val;
+            sum=max(sum,val);
+            head=head->next;
+            curr=curr->next;
+        }
+        return sum;
+    }
+};
+
