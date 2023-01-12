@@ -1,0 +1,56 @@
+You are given the head of a linked list with n nodes.
+
+For each node in the list, find the value of the next greater node. That is, for each node, find the value of the first node that is next to it and has a strictly larger value than it.
+
+Return an integer array answer where answer[i] is the value of the next greater node of the ith node (1-indexed). If the ith node does not have a next greater node, set answer[i] = 0.
+
+// finding the length of ll and doing the same using stack as we have done in next greater element!!
+class Solution {
+public:
+    int getlen(ListNode* head){
+        int c=0;
+        while(head){
+            c++;
+            head=head->next;
+        }
+        return c;
+    }
+    vector<int> nextLargerNodes(ListNode* head) {
+        int n=getlen(head);
+        stack<pair<int,int>>s;
+        vector<int>ans(n,0);
+        int i=0;
+        while(head){
+            while(!s.empty()&& head->val>s.top().first){
+                ans[s.top().second]=head->val;
+                s.pop();
+            }
+            s.push({head->val,i++});
+            head=head->next;
+        }
+        return ans;
+    }
+};
+
+method2---//actually we don't need to find out the len of ll..we can simply push_back zero then updating the value if we found nge for that index.
+
+class Solution {
+public:
+
+    vector<int> nextLargerNodes(ListNode* head) {
+        
+        stack<pair<int,int>>s;
+        vector<int>ans;
+        int i=0;
+        while(head){
+            while(!s.empty()&& head->val>s.top().first){
+                ans[s.top().second]=head->val;
+                s.pop();
+            }
+            s.push({head->val,i++});
+            head=head->next;
+            ans.push_back(0);
+        }
+        return ans;
+    }
+};
