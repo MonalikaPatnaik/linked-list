@@ -1,0 +1,64 @@
+You are given the head of a linked list, and an integer k.
+
+Return the head of the linked list after swapping the values of the kth node from the beginning and the kth node from the end (the list is 1-indexed).
+
+Method1:
+
+// in this first we find the len of ll and make two nodes(for storing the node from front and from end) and then make a counter c and keep track of 
+nodes when c==k and c==n-k+1
+
+class Solution {
+public:
+    int getlen(ListNode* temp){
+        int c=0;
+        while(temp){
+            c++;
+            temp=temp->next;
+        }
+        return c;
+    }
+    ListNode* swapNodes(ListNode* head, int k) {
+        int c=1; // c mtlb counter to track where we have reached in the ll
+        ListNode* temp=head;
+        int n=getlen(temp);
+        ListNode* node1=NULL;ListNode*node2=NULL;
+        while(c<=n){
+            if(c==k)node1=temp;
+           else if(c==n-k+1)node2=temp;
+            if(node1 && node2)break;
+            c++;
+            temp=temp->next;
+        }
+       if(node1 && node2) {
+           swap(node1->val,node2->val);
+       }
+        return head;
+    }
+};
+
+Method 2: //two pointer approach
+// we have done this in a single pass..initialize both the pointers with head..and if counter is equal to k..store it in some another node..if counter is less than k 
+simply move the temp pointer and if it is greater than k then move the second pointer until temp is not null..jab temp become nll then our second pointer has reached 
+to n-kth node!!
+
+class Solution {
+public:
+    
+    ListNode* swapNodes(ListNode* head, int k) {
+        int c=1;
+        ListNode* temp=head;
+        // int n=getlen(temp);
+        ListNode* node1=head;ListNode*node2=NULL;
+        while(temp){
+            // if(c<k)temp=temp->next;
+            if(c>k)node1=node1->next;
+            else if(c==k)node2=temp;
+            c++;
+            temp=temp->next;
+        }
+       
+           swap(node1->val,node2->val);
+       
+        return head;
+    }
+};
