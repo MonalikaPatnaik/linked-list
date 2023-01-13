@@ -49,15 +49,15 @@ public:
             ListNode*prev=NULL;
             ListNode*curr=head;
             for(int j=0;j<k;j++){
-                nxt=curr->next;
-             curr->next=prev;
-             prev=curr;
-             curr=nxt;
+                nxt=head->next;
+             head->next=prev;
+             prev=head;
+             head=nxt;
             }
             dummy->next=prev;
-            dummy=head;
-            head->next=curr;
-            head=curr;
+            dummy=curr;
+            curr->next=head;
+            // head=curr;
         }
         return start->next;
     }
