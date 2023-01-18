@@ -20,9 +20,9 @@ public:
         return slow;
     }
     ListNode*merge(ListNode*&head1,ListNode*&head2){
-        ListNode*ans=new ListNode(-1);
+        ListNode*dummy=new ListNode(-1);
         
-        ListNode*dummy=ans;
+        ListNode*ans=dummy;
          if(!head1)return head2;
         if(!head2)return head1;
         while(head1 && head2){
