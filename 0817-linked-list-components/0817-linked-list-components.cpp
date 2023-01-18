@@ -31,11 +31,16 @@ public:
 //         }
 //         return c;
         while(head){
-          if(mp.find(head->val)!=mp.end() && flag){
-               c++;
-               flag=false;
+          if(mp.find(head->val)==mp.end()){
+               
+              flag=true;
            } 
-        else if(mp.find(head->val)==mp.end()) flag=true;
+        else {
+            if(flag){
+              c++;
+               flag=false;  
+            }
+        } 
         head=head->next;
         }
         return c;
