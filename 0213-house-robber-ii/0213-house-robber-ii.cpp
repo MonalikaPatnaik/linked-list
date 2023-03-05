@@ -28,17 +28,20 @@ public:
         //    else dp[i]=max(nums[i-1]+dp[i-2],dp[i-1]);
         // }
         // return dp[n];
-        
+        vector<int>dp1(n,-1);
+        vector<int>dp2(n,-1);
         vector<int>v1(nums.begin(),nums.end()-1);
         vector<int>v2(nums.begin()+1,nums.end());
-          vector<int>dp1(n);dp1[0]=0;dp1[1]=v1[0];
-        vector<int>dp2(n);dp2[0]=0;dp2[1]=v2[0];
-        for(int i=2;i<n;i++){
-            dp1[i]=max(dp1[i-1],v1[i-1]+dp1[i-2]);
-             dp2[i]=max(dp2[i-1],v2[i-1]+dp2[i-2]);
-        }
-        // int a1=solve(v1,n-1,dp);
-        // int a2=solve(v2,n-1,dp);
-        return max(dp1[n-1],dp2[n-1]);
+        //   vector<int>dp1(n);dp1[0]=0;dp1[1]=v1[0];
+        // vector<int>dp2(n);dp2[0]=0;dp2[1]=v2[0];
+        // for(int i=2;i<n;i++){
+        //     dp1[i]=max(dp1[i-1],v1[i-1]+dp1[i-2]);
+        //      dp2[i]=max(dp2[i-1],v2[i-1]+dp2[i-2]);
+        // }
+        int a1=solve(v1,n-1,dp1);
+        // dp(n,-1);
+        int a2=solve(v2,n-1,dp2);
+        // return max(dp1[n-1],dp2[n-1]);
+        return max(a1,a2);
     }
 };
